@@ -1,0 +1,28 @@
+# Dependencies and build output are recreated inside the image.
+node_modules
+dist
+coverage
+*.tsbuildinfo
+
+# Git, GitHub and local editor files.
+.git
+.github
+.gitignore
+.vscode
+.idea
+
+# Secrets and local-only environment files.
+.env
+.env.*
+.lerd.local.yaml
+
+# lerd development setup.
+Containerfile.lerd
+.lerd.yaml
+
+# Tests, docs and local tooling are not needed in the runtime image.
+test
+**/*.spec.ts
+**/*.e2e-spec.ts
+README.md
+docker-compose*.yml
