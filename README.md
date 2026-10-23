@@ -101,6 +101,7 @@ Unknown task IDs return `404`. Invalid payloads return `400`.
 - `completed` must be a boolean
 - unknown fields are rejected (`forbidNonWhitelisted`)
 - leading and trailing spaces are removed from titles
+- optional fields may be omitted, but `null` is rejected
 
 The global `ValidationPipe` is registered through `APP_PIPE` in
 `src/app.module.ts`, so the same rules apply in tests and in production.
@@ -208,8 +209,8 @@ podman logs -f lerd-custom-ci-cd-learning-api
 
 Because the project directory is mounted into the container, editing a source
 file triggers the Nest watch mode. If a watch restart fails with
-`EADDRINUSE`, restart the lerd site from the lerd dashboard (or `lerd restart`
-if your lerd version provides it); the old process was still holding port 3000.
+`EADDRINUSE`, restart the lerd site from the lerd dashboard; the old process was
+still holding port 3000.
 
 The local site uses HTTP. Public HTTPS is provided by Render after deployment.
 
@@ -574,18 +575,18 @@ git commit
 
 ## Learning stages checklist
 
-- [ ] **1. Scaffold** — NestJS, TypeScript, lerd custom container, tests, lint.
-- [ ] **2. API** — tasks module, DTO validation, status codes, `404`s.
-- [ ] **3. Tests** — unit tests for the service and e2e tests for HTTP.
-- [ ] **4. Git** — repository, `.gitignore`, initial commit, GitHub, branch, PR.
-- [ ] **5. CI** — `.github/workflows/ci.yml` runs lint, tests and build on push/PR.
-- [ ] **6. Failure** — intentionally break a test, push, watch CI fail.
-- [ ] **7. Fix** — repair the test, push, watch CI pass.
-- [ ] **8. Container** — `podman build`, `podman run`, `/health`, logs, stop.
-- [ ] **9. CD** — Render Blueprint, free plan, deploy after CI checks pass.
-- [ ] **10. Public test** — open the HTTPS URL and run the smoke test.
-- [ ] **11. Broken deploy** — break the build/test, confirm Render does not deploy.
-- [ ] **12. Operate** — read logs, roll back, review the workflow, update this README.
+- [x] **1. Scaffold** — NestJS, TypeScript, lerd custom container, tests, lint.
+- [x] **2. API** — tasks module, DTO validation, status codes, `404`s.
+- [x] **3. Tests** — unit tests for the service and e2e tests for HTTP.
+- [ ] **4. Git** — local repository, `.gitignore` and commits are done; GitHub push, branch and PR are pending account access.
+- [x] **5. CI** — `.github/workflows/ci.yml` runs lint, tests and build on push/PR.
+- [ ] **6. Failure** — intentionally break a test, push, watch CI fail (needs the GitHub remote).
+- [ ] **7. Fix** — repair the test, push, watch CI pass (needs the GitHub remote).
+- [x] **8. Container** — `podman build`, `podman run`, `/health`, logs, stop.
+- [ ] **9. CD** — Render Blueprint and `render.yaml` are ready; the deploy is pending a Render account.
+- [ ] **10. Public test** — open the HTTPS URL and run the smoke test (pending deploy).
+- [ ] **11. Broken deploy** — break the build/test, confirm Render does not deploy (pending deploy).
+- [ ] **12. Operate** — README and rollback docs are done; live logs and rollback are pending deploy.
 
 ## Security notes
 
