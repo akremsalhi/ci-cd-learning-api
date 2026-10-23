@@ -1,5 +1,5 @@
 import { Transform } from 'class-transformer';
-import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
+import { IsNotEmpty, IsString, MaxLength, ValidateIf } from 'class-validator';
 
 export class CreateTaskDto {
   @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
@@ -8,7 +8,7 @@ export class CreateTaskDto {
   @MaxLength(200)
   title!: string;
 
-  @IsOptional()
+  @ValidateIf((_object, value) => value !== undefined)
   @IsString()
   @MaxLength(2000)
   description?: string;

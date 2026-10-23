@@ -114,6 +114,11 @@ describe('ci-cd-learning-api (e2e)', () => {
       .post('/tasks')
       .send({ title: 'Valid title', unexpected: true })
       .expect(400);
+
+    await request(app.getHttpServer())
+      .post('/tasks')
+      .send({ title: 'Valid title', description: null })
+      .expect(400);
   });
 
   it('rejects invalid update payloads', async () => {
@@ -130,6 +135,21 @@ describe('ci-cd-learning-api (e2e)', () => {
     await request(app.getHttpServer())
       .patch(`/tasks/${created.body.id}`)
       .send({ title: '   ' })
+      .expect(400);
+
+    await request(app.getHttpServer())
+      .patch(`/tasks/${created.body.id}`)
+      .send({ title: null })
+      .expect(400);
+
+    await request(app.getHttpServer())
+      .patch(`/tasks/${created.body.id}`)
+      .send({ completed: null })
+      .expect(400);
+
+    await request(app.getHttpServer())
+      .patch(`/tasks/${created.body.id}`)
+      .send({ unexpected: true })
       .expect(400);
   });
 });

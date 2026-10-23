@@ -2,25 +2,25 @@ import { Transform } from 'class-transformer';
 import {
   IsBoolean,
   IsNotEmpty,
-  IsOptional,
   IsString,
   MaxLength,
+  ValidateIf,
 } from 'class-validator';
 
 export class UpdateTaskDto {
-  @IsOptional()
+  @ValidateIf((_object, value) => value !== undefined)
   @Transform(({ value }) => (typeof value === 'string' ? value.trim() : value))
   @IsString()
   @IsNotEmpty()
   @MaxLength(200)
   title?: string;
 
-  @IsOptional()
+  @ValidateIf((_object, value) => value !== undefined)
   @IsString()
   @MaxLength(2000)
   description?: string;
 
-  @IsOptional()
+  @ValidateIf((_object, value) => value !== undefined)
   @IsBoolean()
   completed?: boolean;
 }
