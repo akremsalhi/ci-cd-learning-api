@@ -1,0 +1,20 @@
+# Render Blueprint for a free Docker web service.
+#
+# Render's free plan is documented at https://render.com/docs/free
+# Free services spin down after 15 minutes without traffic and take about
+# a minute to wake up. They are not suitable for production.
+services:
+  - type: web
+    name: ci-cd-learning-api
+    runtime: docker
+    plan: free
+    region: frankfurt
+    branch: main
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    # Render deploys only after the GitHub Actions checks for the commit pass.
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: NODE_ENV
+        value: production
