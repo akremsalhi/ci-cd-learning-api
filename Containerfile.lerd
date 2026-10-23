@@ -1,0 +1,7 @@
+FROM docker.io/library/node:22-bookworm-slim
+
+ENV NODE_ENV=development
+ENV PORT=3000
+ENV HOST=0.0.0.0
+
+CMD ["npm", "run", "start:dev"]

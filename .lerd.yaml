@@ -1,0 +1,4 @@
+domains:
+  - ci-cd-learning-api
+container:
+  port: 3000
